@@ -32,7 +32,7 @@ function start(script, env) {
   return child;
 }
 async function stop(child) {
-  if (!child || child.exitCode !== null) return;
+  if (!child || child.exitCode !== null || child.signalCode !== null) return;
   child.kill();
   await Promise.race([once(child, 'exit'), new Promise(resolve => setTimeout(resolve, 3000))]);
 }
