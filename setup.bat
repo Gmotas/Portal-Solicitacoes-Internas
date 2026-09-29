@@ -12,9 +12,8 @@ if errorlevel 1 (
   echo [ERRO] Node.js nao encontrado. Instale Node.js 22.13 ou superior em https://nodejs.org/
   exit /b 1
 )
-for /f "tokens=1,2 delims=v." %%a in ('node -v') do set NODE_MAJOR=%%a& set NODE_MINOR=%%b
-set NODE_MAJOR=%NODE_MAJOR:v=%
-if %NODE_MAJOR% LSS 22 (
+node -e "const v=process.versions.node.split('.').map(Number);process.exit(v[0]>22||(v[0]===22&&v[1]>=13)?0:1)"
+if errorlevel 1 (
   echo [ERRO] E necessario Node.js 22.13 ou superior. Versao encontrada:
   node -v
   exit /b 1
