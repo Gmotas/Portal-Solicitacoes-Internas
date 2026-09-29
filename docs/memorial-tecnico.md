@@ -3,23 +3,26 @@
 # Memorial Técnico de Desenvolvimento
 
 ## Objetivo
-Portal web para registrar demandas internas e acompanhar sua evolução.
+Portal web para registrar demandas internas e acompanhar sua evolução, agora com caminhos reproduzíveis de instalação local e execução conteinerizada.
 
 ## Tecnologias e justificativas
-- Node.js e JavaScript: mesma linguagem no backend e frontend.
-- HTTP nativo: reduz dependências para este escopo e deixa explícito o fluxo de requisições.
-- SQLite / node:sqlite: persistência SQL em arquivo, simples de executar localmente.
-- HTML, CSS e JavaScript: interface sem etapa de compilação, adaptável a telas menores.
-- crypto.scrypt: deriva hash de senha com salt aleatório.
+- Node.js e JavaScript: mesma linguagem no backend e no frontend.
+- HTTP nativo: reduz dependências e deixa explícito o fluxo de requisições.
+- SQLite / node:sqlite: persistência SQL em arquivo sem servidor de banco separado.
+- HTML, CSS e JavaScript: interface sem etapa de compilação.
+- Docker Compose e Nginx: ambiente padronizado com frontend e backend separados.
 
 ## Arquitetura
-O navegador consome endpoints JSON. O servidor autentica a sessão, valida os dados, aplica regras de negócio e consulta SQLite. A estrutura foi mantida enxuta para um projeto de avaliação júnior; se crescer, rotas, serviços e repositórios podem ser separados.
+O navegador consome endpoints JSON. O backend autentica a sessão, valida dados, aplica regras de negócio e consulta SQLite. O frontend local pode ser servido por `frontend-server.js`, que encaminha chamadas `/api/*` ao backend. No Docker, Nginx entrega os arquivos estáticos e faz proxy para o serviço backend pela rede privada.
 
-## Modelagem
-As tabelas users e requests têm relação um-para-muitos. As solicitações guardam título, descrição, categoria, status, solicitante e datas. O schema.sql documenta a estrutura.
+## Configuração e persistência
+- `config.js` lê `.env` sem dependência npm externa; variáveis já definidas no ambiente têm prioridade.
+- `migrate.js` aplica o schema idempotente e cria usuário e dados de demonstração quando necessário.
+- `DB_PATH` configura o arquivo SQLite; Compose usa volume nomeado persistente.
+- `setup.bat` e `setup.sh` verificam Node/npm, criam `.env`, instalam dependências e executam migrations.
 
 ## Segurança e limitações
-O login usa hash de senha e cookie HttpOnly com SameSite=Strict. Consultas SQL usam parâmetros e campos são validados no servidor. As sessões ficam em memória; não há limitação de tentativas nem proteção CSRF completa. Para produção, adicionar HTTPS, cookie Secure, gestão de perfis, sessões persistentes, auditoria, monitoramento e testes de segurança.
+O login usa hash de senha com salt e cookie HttpOnly/SameSite=Strict. Consultas SQL usam parâmetros e os campos são validados no servidor. As sessões ficam em memória; não há limitação de tentativas, MFA ou auditoria. A senha padrão é apenas para demonstração. Antes de produção, adicionar HTTPS, cookie Secure, proteção CSRF adequada, perfis e permissões, rate limiting, auditoria e monitoramento.
 
 ## Regras implementadas
 - Login necessário para operações internas.
@@ -27,9 +30,13 @@ O login usa hash de senha e cookie HttpOnly com SameSite=Strict. Consultas SQL u
 - Apenas o solicitante edita/exclui enquanto a solicitação está Aberta.
 - Filtros por período, categoria, status e título.
 - Dashboard conta total, abertas, em atendimento e concluídas.
-- Status aceitos: Aberto, Em Atendimento e Concluído.
 
-## Testes e análise crítica
-Execute os cenários do README antes de entregar: autenticação, criação, filtros, mudança de status, edição, exclusão e persistência após reinício. Registre apenas testes realmente executados e inclua capturas reais da aplicação.
+## Execução e validação
+Consulte [README.md](../README.md) para instalação, comandos, credenciais, Docker Compose e solução de problemas. Use `npm run check`, `npm run migrate` e `docker compose config` antes da entrega. Os testes de execução devem ser registrados somente após efetivamente executados.
 
-Melhorias futuras: testes automatizados, paginação, auditoria, migrações, perfis de acesso, limite de tentativas, sessão persistente e implantação com Docker/CI-CD.
+## Melhorias futuras
+Testes automatizados de integração, paginação, auditoria, perfis de acesso, limitação de tentativas, sessões persistentes, CI/CD e suporte a um banco de dados servidor em cenários de maior escala.
+
+---
+
+© Gabriel Mota Silva. Este projeto foi desenvolvido exclusivamente para avaliação técnica e demonstração de competências profissionais. A disponibilização deste código para análise não constitui cessão de propriedade intelectual, licença de uso comercial ou transferência de direitos autorais.
