@@ -4,6 +4,7 @@ ENV NODE_ENV=production HOST=0.0.0.0 PORT=3000 DB_PATH=/app/data/portal.db
 WORKDIR /app
 COPY package.json ./
 COPY server.js config.js migrate.js schema.sql ./
+COPY public/ ./public/
 RUN mkdir -p /app/data && chown -R node:node /app
 USER node
 EXPOSE 3000
