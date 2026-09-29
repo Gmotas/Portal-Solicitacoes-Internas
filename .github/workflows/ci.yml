@@ -19,5 +19,15 @@ jobs:
         run: npm run check
       - name: Testar fluxos e persistência
         run: npm test
-      - name: Validar configuração Docker Compose
+      - name: Validar Docker Compose
         run: docker compose config
+      - name: Construir e iniciar os containers
+        run: docker compose up --build -d
+      - name: Validar backend e frontend no Docker
+        run: |
+          curl --fail --retry 20 --retry-delay 2 --retry-connrefused http://localhost:3000/api/health
+          curl --fail --retry 20 --retry-delay 2 --retry-connrefused http://localhost:5173/
+          curl --fail http://localhost:5173/api/health
+      - name: Encerrar ambiente de teste
+        if: always()
+        run: docker compose down -v
