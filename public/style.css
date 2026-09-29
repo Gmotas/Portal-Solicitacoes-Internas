@@ -1,0 +1,28 @@
+/* © 2026 Gabriel Mota Silva. Todos os direitos reservados. Consulte COPYRIGHT.md e LICENSE. */
+:root{font-family:Arial,sans-serif;color:#242941;background:#f6f7fb;--p:#5b50d6;--m:#858ba2;--b:#e7e9f2}
+*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:8px;padding:11px 14px;font-size:12px;font-weight:700}
+input,select,textarea{width:100%;border:1px solid #dfe1eb;border-radius:8px;padding:11px;background:white;font-size:13px;color:#282d43}
+label{display:block;font-size:12px;font-weight:700;margin:14px 0 7px}h1{font-size:25px;margin:4px 0}h2{font-size:17px}
+.hidden{display:none!important}.primary{background:var(--p);color:white}.secondary{background:#f0f1f8;color:#555b73;border:1px solid var(--b)}
+.eyebrow{font-size:10px;letter-spacing:1.4px;font-weight:800;color:var(--p)}.muted,small{font-size:12px;color:var(--m)}
+.login{min-height:100vh;display:grid;place-items:center;padding:20px;background:#f0efff}
+.card{background:white;border:1px solid var(--b);border-radius:17px;padding:30px;box-shadow:0 15px 50px #25265010}.login .card{width:min(100%,400px)}
+.logo{width:42px;height:42px;display:grid;place-items:center;background:var(--p);color:white;font-weight:900;border-radius:12px}
+.login h1{margin-bottom:8px}.login .primary{width:100%;margin-top:20px}.error{color:#c3344b;font-size:12px}
+#app{min-height:100vh}aside{position:fixed;inset:0 auto 0 0;width:225px;padding:25px 17px;background:white;border-right:1px solid var(--b)}
+aside h3{margin-bottom:0}aside .nav{display:block;width:100%;text-align:left;margin:8px 0;background:transparent;color:#737990}.nav.active{background:#efeeff;color:var(--p)}
+.user{position:absolute;bottom:20px;left:18px;right:18px;display:flex;align-items:center;justify-content:space-between;font-size:12px}
+main{margin-left:225px;padding:25px 32px;max-width:1600px}header{display:flex;align-items:center;justify-content:space-between;padding-bottom:22px;border-bottom:1px solid var(--b)}
+.welcome{margin:24px 0;padding:23px;border-radius:14px;background:#eeedff;border:1px solid #e3e1ff}.welcome h2{margin:0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}.stats article,.panel{background:white;border:1px solid var(--b);border-radius:12px;padding:18px}
+.stats span{display:block;color:var(--m);font-size:12px}.stats strong{display:block;font-size:29px;margin-top:12px}.panel{margin-bottom:20px}
+.filters{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr auto;gap:12px;align-items:end}.filters label{margin:0}.filters input,.filters select{margin-top:7px}
+.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:800px}th,td{text-align:left;padding:12px 9px;border-bottom:1px solid #f0f1f6;font-size:11px}
+th{color:#9398aa;background:#fafaff;font-size:9px;text-transform:uppercase}.badge{display:inline-block;border-radius:20px;padding:6px 8px;font-size:10px;font-weight:700}
+.Aberto{background:#fff2d8;color:#aa7516}.Em-Atendimento{background:#eaf3ff;color:#347bbd}.Concluído{background:#e3f8ed;color:#23885d}
+.actions{display:flex;gap:5px}.actions button{padding:6px 8px;background:white;border:1px solid var(--b);font-size:10px}
+.empty{padding:25px;text-align:center;color:var(--m);font-size:12px}.overlay{position:fixed;inset:0;background:#19192e77;display:grid;place-items:center;padding:20px;z-index:5}
+.modal{position:relative;width:min(100%,520px)}.modal .primary{width:100%;margin-top:10px}.close{position:absolute;right:16px;top:14px;background:transparent;font-size:22px;color:var(--m)}
+#toast{display:none;position:fixed;bottom:20px;right:20px;background:#252a40;color:white;padding:14px 18px;border-radius:9px;font-size:12px;z-index:8}#toast.show{display:block}
+@media(max-width:1000px){.filters{grid-template-columns:repeat(3,1fr)}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){aside{position:static;width:auto;padding:12px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}aside h3,aside>p,.user{display:none}aside .nav{width:auto;margin:0;padding:10px}main{margin:0;padding:16px 12px}.stats{gap:8px}.stats article{padding:13px}.filters{grid-template-columns:repeat(2,1fr)}header h1{font-size:20px}.welcome{padding:16px}}
