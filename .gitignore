@@ -1,4 +1,12 @@
 node_modules/
-portal.db
-*.log
 .env
+.env.*
+!.env.example
+data/
+portal.db
+*.db
+*.sqlite
+*.sqlite3
+*.log
+.DS_Store
+Thumbs.db
