@@ -77,7 +77,7 @@ async function handle(req, res) {
 
     if (req.method === 'GET' && url.pathname === '/api/requests') {
       const where = [], args = [];
-      for (const [key, expression] of [['from', 'date(r.created_at) >= date(?)'], ['to', 'date(r.created_at) <= date(?)]]) {
+      for (const [key, expression] of [['from', 'date(r.created_at) >= date(?)'], ['to', 'date(r.created_at) <= date(?)']]) {
         const value = url.searchParams.get(key);
         if (value) { where.push(expression); args.push(value); }
       }
