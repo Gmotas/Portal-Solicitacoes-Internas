@@ -1,0 +1,15 @@
+# © 2026 Gabriel Mota Silva. Todos os direitos reservados.
+.git
+.github
+node_modules
+.env
+.env.*
+!.env.example
+data
+portal.db
+*.db
+*.sqlite
+*.sqlite3
+*.log
+.DS_Store
+Thumbs.db
